@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: softdesign
+      POSTGRES_USER: softdesign
+      POSTGRES_PASSWORD: softdesign
+    volumes:
+      - softdesign-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U softdesign -d softdesign"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  back:
+    build: ./back
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: softdesign
+      DB_USER: softdesign
+      DB_PASSWORD: softdesign
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  front:
+    build: ./front
+    ports:
+      - "80:80"
+    depends_on:
+      - back
+
+volumes:
+  softdesign-postgres-data:

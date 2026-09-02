@@ -9,3 +9,8 @@ front/node_modules
 front/dist
 front/dist-ssr
 front/*.local
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea
