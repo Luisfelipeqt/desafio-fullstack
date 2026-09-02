@@ -19,7 +19,9 @@ import technical.softdesign.core.repositories.PautaRepository;
 import technical.softdesign.core.repositories.SessaoVotacaoRepository;
 import technical.softdesign.core.repositories.VotoRepository;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
 
 import static technical.softdesign.api.common.dtos.Resultado.APROVADA;
@@ -69,7 +71,8 @@ public class PautaService {
         sessao = sessaoVotacaoRepository.save(sessao);
         log.info("Sessao de votacao aberta. pautaId={} sessaoId={} fechamento={}",
                 pautaId, sessao.getId(), sessao.getDataFechamento());
-        return new SessaoVotacaoResponse(sessao.getId(), pautaId, sessao.getDataAbertura(), sessao.getDataFechamento());
+        return new SessaoVotacaoResponse(sessao.getId(), pautaId,
+                toInstant(sessao.getDataAbertura()), toInstant(sessao.getDataFechamento()));
     }
 
     public void votar(UUID pautaId, VotoRequest request) {
@@ -101,6 +104,10 @@ public class PautaService {
                 : EMPATE;
         return new ResultadoVotacaoResponse(pautaId, pauta.getTituloPauta(), votosSim, votosNao,
                 !sessao.isAberta(), resultado);
+    }
+
+    private Instant toInstant(LocalDateTime dateTime) {
+        return dateTime.atZone(ZoneId.systemDefault()).toInstant();
     }
 
     private String apenasDigitos(String cpf) {

@@ -2,7 +2,7 @@ package technical.softdesign.api.common.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Schema(description = "Dados de uma sessao de votacao")
@@ -15,9 +15,9 @@ public record SessaoVotacaoResponse(
         UUID pautaId,
 
         @Schema(description = "Momento de abertura da sessao")
-        LocalDateTime dataAbertura,
+        Instant dataAbertura,
 
         @Schema(description = "Momento de fechamento da sessao")
-        LocalDateTime dataFechamento
+        Instant dataFechamento
 ) {
 }
