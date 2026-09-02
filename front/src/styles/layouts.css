@@ -1,0 +1,78 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+.stack > * {
+  margin-block: 0;
+}
+.stack > * + * {
+  margin-block-start: var(--space, var(--s1));
+}
+
+.center {
+  box-sizing: content-box;
+  max-inline-size: var(--measure, 60ch);
+  margin-inline: auto;
+  padding-inline: var(--space, var(--s1));
+}
+.center.center-intrinsic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-inline-size: none;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, var(--s0));
+  align-items: center;
+}
+
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space, var(--s1));
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--threshold, 30rem) - 100%) * 999);
+}
+/* quantity query: 5+ items always stack, regardless of available width */
+.switcher > :nth-last-child(n + 5),
+.switcher > :nth-last-child(n + 5) ~ * {
+  flex-basis: 100%;
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  min-block-size: var(--min-height, 100vh);
+  padding: var(--space, var(--s1));
+}
+.cover > * {
+  margin-block: var(--space, var(--s1));
+}
+.cover > :first-child:not(.cover-main) {
+  margin-block-start: 0;
+}
+.cover > :last-child:not(.cover-main) {
+  margin-block-end: 0;
+}
+.cover > .cover-main {
+  margin-block: auto;
+}
+
+.icon {
+  width: 0.75em;
+  width: 1cap;
+  height: 0.75em;
+  height: 1cap;
+}
+.with-icon {
+  display: inline-flex;
+  align-items: baseline;
+}
+.with-icon .icon {
+  margin-inline-end: var(--space, 0.5em);
+}

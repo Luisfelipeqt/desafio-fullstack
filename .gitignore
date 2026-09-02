@@ -3,3 +3,9 @@
 
 # back (Maven)
 back/target
+
+# front (Node/Vite)
+front/node_modules
+front/dist
+front/dist-ssr
+front/*.local

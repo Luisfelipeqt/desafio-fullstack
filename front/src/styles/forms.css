@@ -1,0 +1,78 @@
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--s1);
+  text-align: start;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: start;
+
+  label {
+    font-size: 14px;
+    color: var(--text-h);
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: var(--text-h);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 4.5em;
+  }
+}
+
+.button {
+  font: inherit;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.message {
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 15px;
+  text-align: start;
+}
+.message.error {
+  color: #b91c1c;
+  background: rgba(185, 28, 28, 0.1);
+}
+.message.success {
+  color: #15803d;
+  background: rgba(21, 128, 61, 0.1);
+}
