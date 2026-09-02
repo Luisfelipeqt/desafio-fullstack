@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# back (Maven)
+back/target

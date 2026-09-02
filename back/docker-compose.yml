@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: softdesign-postgres
+    environment:
+      POSTGRES_DB: softdesign
+      POSTGRES_USER: softdesign
+      POSTGRES_PASSWORD: softdesign
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - softdesign-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U softdesign -d softdesign"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  softdesign-postgres-data:
